@@ -1,5 +1,4 @@
 {
- 
   "name": "contactlist",
   "version": "1.0.0",
   "description": "Get contact informations from a given web site and save into a an excel file.",
@@ -17,7 +16,10 @@
     "url": "https://github.com/brkcrdk/contactList/issues"
   },
   "homepage": "https://github.com/brkcrdk/contactList#readme",
-   "devDependencies": {
+  "devDependencies": {
+    "@types/node": "^17.0.40",
+    "ts-node": "^10.8.1",
+    "tsconfig-paths": "^4.0.0",
     "typescript": "^4.7.3"
   }
 }
