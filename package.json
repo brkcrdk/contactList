@@ -1,0 +1,23 @@
+{
+ 
+  "name": "contactlist",
+  "version": "1.0.0",
+  "description": "Get contact informations from a given web site and save into a an excel file.",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brkcrdk/contactList.git"
+  },
+  "author": "Burak Çardak",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/brkcrdk/contactList/issues"
+  },
+  "homepage": "https://github.com/brkcrdk/contactList#readme",
+   "devDependencies": {
+    "typescript": "^4.7.3"
+  }
+}
