@@ -13,4 +13,5 @@ NOTE: x is some random webpage that i keep secret for obvious reasons.
 
 * [x] Go to page and collect pages that matches given country names.
 * [x] Collect city names from countries.
-* [ ] Collect otels from cities.
+* [x] Test getting otel details with one city.
+* [ ] Get all available otels details.
