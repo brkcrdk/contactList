@@ -1,2 +1,2 @@
 export { default as getCityLinks } from './getCityLinks';
-export { default as getDetail } from './getDetail';
+export { default as getOtelLinks } from './getOtelLinks';
