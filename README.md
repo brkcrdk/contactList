@@ -11,6 +11,6 @@ NOTE: x is some random webpage that i keep secret for obvious reasons.
 
 #### Steps:
 
-* [ ] Go to page and collect pages that matches given country names.
-* [ ] Collect city names from countries.
+* [x] Go to page and collect pages that matches given country names.
+* [x] Collect city names from countries.
 * [ ] Collect otels from cities.
