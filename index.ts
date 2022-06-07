@@ -3,21 +3,27 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
+const mainUrl = process.env.WEB_PAGE;
+
 const test = async () => {
   console.log('started to collecting');
   const browser = await puppeteer.launch({ headless: false });
   const page = await browser.newPage();
-  await page.goto(String(process.env.WEB_PAGE));
 
-  const element = await page.$$('.pr-card');
+  const pageURL = String(`${mainUrl}/mugla-otelleri-telefon.html`);
+  await page.goto(pageURL);
 
-  // element.forEach(async (el) => {
-  //   await el.click();
-  // });
+  const cardLinks = await page.$$eval('.pr-card-link', (nodes) =>
+    nodes.map((val) => val.getAttribute('href'))
+  );
+  console.log(cardLinks);
 
-  for (let i = 0; i < element.length; i++) {
-    await element[i].click();
-  }
+  page.goto(`${mainUrl}/mugla-akyaka-otelleri-iletisim.html`);
+
+  // for (let i = 0; i < cardLinks.length; i++) {
+  //   // const properties = await cardLinks[i]
+  //   console.log(cardLinks[i]);
+  // }
 
   // await browser.close();
   console.log('finished collecting');
