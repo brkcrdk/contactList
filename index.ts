@@ -1,6 +1,6 @@
 import puppeteer from 'puppeteer';
 import dotenv from 'dotenv';
-import { getCityLinks, getOtelLinks } from 'utils';
+import { getCityLinks, getOtelLinks, getOtelDetail } from 'utils';
 dotenv.config();
 
 const mainUrl = process.env.WEB_PAGE;
@@ -17,15 +17,26 @@ const app = async () => {
 
   // console.log(cityLinks);
 
-  console.log('started collecting otel links');
-  const otelLinks = await getOtelLinks({
+  // console.log('started collecting otel links');
+  // const otelLinks = await getOtelLinks({
+  //   page,
+  //   cityUrl: 'mugla-dalyan-otelleri-iletisim.html'
+  // });
+
+  // console.log(otelLinks);
+
+  // console.log('succesfully collected otel links!');
+
+  console.log('started collecting otel detail');
+
+  const otelDetail = await getOtelDetail({
     page,
-    cityUrl: 'mugla-dalyan-otelleri-iletisim.html'
+    otelUrl: 'hotel-metin-telefon-iletisim.html'
   });
 
-  console.log(otelLinks);
+  await otelDetail?.screenshot({ path: 'x.png' });
 
-  console.log('succesfully collected otel links!');
+  console.log('successflully collected otel detail');
 
   await browser.close();
   console.log('finished collecting');
