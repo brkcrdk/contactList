@@ -1,6 +1,8 @@
 import puppeteer from 'puppeteer';
 import dotenv from 'dotenv';
-import { getCityLinks, getOtelLinks, getOtelDetail } from 'utils';
+import fs from 'fs';
+
+import { getCityLinks, getOtelLinks, getOtelDetail, imgToText } from 'utils';
 dotenv.config();
 
 const mainUrl = process.env.WEB_PAGE;
@@ -29,12 +31,16 @@ const app = async () => {
 
   console.log('started collecting otel detail');
 
-  const otelDetail = await getOtelDetail({
-    page,
-    otelUrl: 'hotel-metin-telefon-iletisim.html'
-  });
+  // const otelDetail = await getOtelDetail({
+  //   page,
+  //   otelUrl: 'hotel-metin-telefon-iletisim.html'
+  // });
 
-  await otelDetail?.screenshot({ path: 'x.png' });
+  // await otelDetail?.screenshot({ path: 'x.png' });
+  // const base64Test = fs.readFileSync('x.png', 'base64');
+  // console.log(base64Test);
+
+  const imgText = imgToText();
 
   console.log('successflully collected otel detail');
 
