@@ -13,5 +13,7 @@ NOTE: x is some random webpage that i keep secret for obvious reasons.
 
 * [x] Go to page and collect pages that matches given country names.
 * [x] Collect city names from countries.
-* [x] Test getting otel details with one city.
+* [x] Test getting all otels available with one city.
+* [x] Test getting otel informations with one otel.
+* [ ] Test getting text from images with taken img.
 * [ ] Get all available otels details.
