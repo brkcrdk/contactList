@@ -31,17 +31,21 @@ const app = async () => {
 
   console.log('started collecting otel detail');
 
-  // const otelDetail = await getOtelDetail({
-  //   page,
-  //   otelUrl: 'hotel-metin-telefon-iletisim.html'
-  // });
+  const otelDetail = await getOtelDetail({
+    page,
+    otelUrl: 'hotel-metin-telefon-iletisim.html'
+  });
 
-  // await otelDetail?.screenshot({ path: 'x.png' });
-  // const base64Test = fs.readFileSync('x.png', 'base64');
-  // console.log(base64Test);
+  await otelDetail?.screenshot({ path: 'x.png' });
 
-  const imgText = imgToText();
-
+  const imgText = await imgToText({ imgUrl: 'x.png' });
+  fs.unlink('x.png', (err) => {
+    if (err) {
+      console.log('couldnt delete this');
+    } else {
+      console.log('x has been deleted');
+    }
+  });
   console.log('successflully collected otel detail');
 
   await browser.close();
