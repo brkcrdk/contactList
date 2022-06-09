@@ -15,5 +15,8 @@ NOTE: x is some random webpage that i keep secret for obvious reasons.
 * [x] Collect city names from countries.
 * [x] Test getting all otels available with one city.
 * [x] Test getting otel informations with one otel.
-* [ ] Test getting text from images with taken img.
+* [x] Test getting text from images with taken img.
+* [x] Test getting text from base64 string. --> Didn't have to use it.
+* [ ] Instead of converting image and text seperately, get text from image in one go.
+* [ ] Delete images after took text from it.
 * [ ] Get all available otels details.
