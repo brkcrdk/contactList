@@ -14,11 +14,11 @@ const app = async () => {
   const pageURL = `${mainUrl}/mugla-otelleri-telefon.html`;
   await page.goto(pageURL);
 
-  console.log('started collecting city links');
+  // console.log('started collecting city links');
 
-  const cityLinks = await getCityLinks({ page });
-  console.log(cityLinks);
-  console.log('cityLinks collected');
+  // const cityLinks = await getCityLinks({ page });
+  // console.log(cityLinks);
+  // console.log('cityLinks collected');
 
   // for (let i = 0; i < cityLinks; i++) {
   //   cityLinks[i];

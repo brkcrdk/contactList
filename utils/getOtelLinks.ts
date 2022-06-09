@@ -20,14 +20,14 @@ const mainUrl = process.env.WEB_PAGE;
 const getOtelLinks = async ({
   page,
   cityUrl
-}: OtelLinks): Promise<ElementHandle<string[]>> => {
+}: OtelLinks): Promise<string[]> => {
   await page.goto(`${mainUrl}/${cityUrl}`);
 
   const otelLinks = await page.$$eval('.pr-link', (nodes) =>
     nodes.map((val) => val.getAttribute('href'))
   );
 
-  return otelLinks;
+  return otelLinks.toString().split(',');
 };
 
 export default getOtelLinks;
