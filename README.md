@@ -20,4 +20,5 @@ NOTE: x is some random webpage that i keep secret for obvious reasons.
 * [x] Instead of converting image and text seperately, get text from image in one go.
 * [x] Delete images after took text from it.
 * [x] Fix getCityLinks returning nodeList instead of array of city url strings.
+* [x] Fix getOtelLinks returning nodeList instead of array of city url strings.
 * [ ] Get all available otels details.
