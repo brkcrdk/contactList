@@ -58,6 +58,6 @@ const app = async () => {
 
   await browser.close();
   console.log('finished collecting');
-};;
+};
 
 app();
