@@ -10,7 +10,8 @@ interface OtelDetail {
 const mainUrl = process.env.WEB_PAGE;
 /**
  * Gelen otel url'inden otel bilgilerinin bulunduğu resmi bulur
- * ve o resmi return eder
+ * O resmi local dosya olarak kaydedi
+ * NOTE: Burada kaldık...
  */
 const getOtelDetail = async ({ page, otelUrl }: OtelDetail) => {
   const computedUrl = `${mainUrl}/${otelUrl}`;
