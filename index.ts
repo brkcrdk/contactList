@@ -14,7 +14,15 @@ const app = async () => {
   const pageURL = `${mainUrl}/mugla-otelleri-telefon.html`;
   await page.goto(pageURL);
 
-  // const cityLinks = await getCityLinks({ page });
+  console.log('started collecting city links');
+
+  const cityLinks = await getCityLinks({ page });
+  console.log(cityLinks);
+  console.log('cityLinks collected');
+
+  // for (let i = 0; i < cityLinks; i++) {
+  //   cityLinks[i];
+  // }
 
   // console.log(cityLinks);
 
@@ -34,6 +42,7 @@ const app = async () => {
   //   page,
   //   otelUrl: 'hotel-metin-telefon-iletisim.html'
   // });
+  // console.log(otelDetail);
 
   // await otelDetail?.screenshot({ path: 'x.png' });
 
@@ -49,6 +58,6 @@ const app = async () => {
 
   await browser.close();
   console.log('finished collecting');
-};
+};;
 
 app();
