@@ -1,6 +1,11 @@
 import { Page } from 'puppeteer';
+import { createWorker } from 'tesseract.js';
 import dotenv from 'dotenv';
+import fs from 'fs';
 dotenv.config();
+const worker = createWorker({
+  logger: (m) => console.log(m)
+});
 
 interface OtelDetail {
   page: Page;
@@ -10,15 +15,32 @@ interface OtelDetail {
 const mainUrl = process.env.WEB_PAGE;
 /**
  * Gelen otel url'inden otel bilgilerinin bulunduğu resmi bulur
- * O resmi local dosya olarak kaydedi
- * NOTE: Burada kaldık...
+ * O resmi local dosya olarak kaydettikten sonra, `tesseract` ile
+ * resimdeki yazıları texte çevirir ve bu texti return eder.
+ * Sonrasında da bu resmi `fs` ile siler.
  */
 const getOtelDetail = async ({ page, otelUrl }: OtelDetail) => {
   const computedUrl = `${mainUrl}/${otelUrl}`;
   await page.goto(computedUrl);
   const imgElement = await page.$('.pr-card > img');
 
-  return imgElement;
+  await imgElement?.screenshot({ path: 'x.png' });
+
+  await worker.load();
+  await worker.loadLanguage('eng');
+  await worker.initialize('eng');
+  const {
+    data: { text }
+  } = await worker.recognize('x.png');
+  await worker.terminate();
+  fs.unlink('x.png', (err) => {
+    if (err) {
+      console.log('couldnt delete this');
+    } else {
+      console.log('x has been deleted');
+    }
+  });
+  return text;
 };
 
 export default getOtelDetail;
