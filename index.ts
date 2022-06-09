@@ -1,8 +1,7 @@
 import puppeteer from 'puppeteer';
 import dotenv from 'dotenv';
-import fs from 'fs';
 
-import { getCityLinks, getOtelLinks, getOtelDetail, imgToText } from 'utils';
+import { getCityLinks, getOtelLinks, getOtelDetail } from 'utils';
 dotenv.config();
 
 const mainUrl = process.env.WEB_PAGE;
@@ -31,21 +30,21 @@ const app = async () => {
 
   console.log('started collecting otel detail');
 
-  const otelDetail = await getOtelDetail({
-    page,
-    otelUrl: 'hotel-metin-telefon-iletisim.html'
-  });
+  // const otelDetail = await getOtelDetail({
+  //   page,
+  //   otelUrl: 'hotel-metin-telefon-iletisim.html'
+  // });
 
-  await otelDetail?.screenshot({ path: 'x.png' });
+  // await otelDetail?.screenshot({ path: 'x.png' });
 
-  const imgText = await imgToText({ imgUrl: 'x.png' });
-  fs.unlink('x.png', (err) => {
-    if (err) {
-      console.log('couldnt delete this');
-    } else {
-      console.log('x has been deleted');
-    }
-  });
+  // const imgText = await imgToText({ imgUrl: 'x.png' });
+  // fs.unlink('x.png', (err) => {
+  //   if (err) {
+  //     console.log('couldnt delete this');
+  //   } else {
+  //     console.log('x has been deleted');
+  //   }
+  // });
   console.log('successflully collected otel detail');
 
   await browser.close();
