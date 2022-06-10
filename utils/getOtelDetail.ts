@@ -3,9 +3,7 @@ import { createWorker } from 'tesseract.js';
 import dotenv from 'dotenv';
 import fs from 'fs';
 dotenv.config();
-const worker = createWorker({
-  logger: (m) => console.log(m)
-});
+const worker = createWorker();
 
 interface OtelDetail {
   page: Page;
