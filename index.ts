@@ -7,7 +7,7 @@ dotenv.config();
 const mainUrl = process.env.WEB_PAGE;
 
 const app = async () => {
-  console.log('started to collecting');
+  console.log('started collecting');
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
 
@@ -17,20 +17,23 @@ const app = async () => {
   console.log('started collecting city links');
 
   const cityLinks = await getCityLinks({ page });
-  console.log(cityLinks);
   console.log('successfully collected city links');
 
   console.log('started collecting otel details');
   for (const cityUrl of cityLinks) {
     const cityName = cityUrl.split('-')[1];
+
     console.log(`started collecting ${cityName} `);
     const otelLinks = await getOtelLinks({
       page,
       cityUrl
     });
-
-    console.log(otelLinks);
     console.log(`successfully collected ${cityName}s otel links `);
+
+    for (const otelUrl of otelLinks) {
+      const otelName = otelUrl.split('-telefon')[0];
+      console.log({ cityName, otelName });
+    }
   }
 
   console.log('successflully collected otel detail');
@@ -66,6 +69,6 @@ const app = async () => {
 
   await browser.close();
   console.log('finished collecting');
-};;
+};
 
 app();
