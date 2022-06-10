@@ -14,15 +14,26 @@ const app = async () => {
   const pageURL = `${mainUrl}/mugla-otelleri-telefon.html`;
   await page.goto(pageURL);
 
-  // console.log('started collecting city links');
+  console.log('started collecting city links');
 
-  // const cityLinks = await getCityLinks({ page });
-  // console.log(cityLinks);
-  // console.log('cityLinks collected');
+  const cityLinks = await getCityLinks({ page });
+  console.log(cityLinks);
+  console.log('successfully collected city links');
 
-  // for (let i = 0; i < cityLinks; i++) {
-  //   cityLinks[i];
-  // }
+  console.log('started collecting otel details');
+  for (const cityUrl of cityLinks) {
+    const cityName = cityUrl.split('-')[1];
+    console.log(`started collecting ${cityName} `);
+    const otelLinks = await getOtelLinks({
+      page,
+      cityUrl
+    });
+
+    console.log(otelLinks);
+    console.log(`successfully collected ${cityName}s otel links `);
+  }
+
+  console.log('successflully collected otel detail');
 
   // console.log(cityLinks);
 
@@ -35,8 +46,6 @@ const app = async () => {
   // console.log(otelLinks);
 
   // console.log('succesfully collected otel links!');
-
-  console.log('started collecting otel detail');
 
   // const otelDetail = await getOtelDetail({
   //   page,
@@ -54,10 +63,9 @@ const app = async () => {
   //     console.log('x has been deleted');
   //   }
   // });
-  console.log('successflully collected otel detail');
 
   await browser.close();
   console.log('finished collecting');
-};
+};;
 
 app();
