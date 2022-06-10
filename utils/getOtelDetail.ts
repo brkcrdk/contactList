@@ -27,21 +27,25 @@ const getOtelDetail = async ({ page, otelUrl, otelName }: OtelDetail) => {
   const imgName = `${otelName}.png`;
   await imgElement?.screenshot({ path: imgName });
 
-  await worker.load();
-  await worker.loadLanguage('eng');
-  await worker.initialize('eng');
+  if (imgElement) {
+    await worker.load();
+    await worker.loadLanguage('eng');
+    await worker.initialize('eng');
 
-  const data = await worker.recognize(imgName);
-  await worker.terminate();
+    const data = await worker.recognize(imgName);
+    await worker.terminate();
 
-  fs.unlink(imgName, (err) => {
-    if (err) {
-      console.log('couldnt delete this');
-    } else {
-      console.log('x has been deleted');
-    }
-  });
-  return data.data.text;
+    fs.unlink(imgName, (err) => {
+      if (err) {
+        console.log(`couldnt delete ${imgName}`);
+      } else {
+        console.log(`${imgName} has been deleted`);
+      }
+    });
+    return data.data.text;
+  } else {
+    return 'iletişim bilgisi bulunamadı.';
+  }
 };
 
 export default getOtelDetail;
