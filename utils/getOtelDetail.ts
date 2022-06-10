@@ -31,9 +31,7 @@ const getOtelDetail = async ({ page, otelUrl, otelName }: OtelDetail) => {
   await worker.loadLanguage('eng');
   await worker.initialize('eng');
 
-  const {
-    data: { text }
-  } = await worker.recognize(imgName);
+  const data = await worker.recognize(imgName);
   await worker.terminate();
 
   fs.unlink(imgName, (err) => {
@@ -43,7 +41,7 @@ const getOtelDetail = async ({ page, otelUrl, otelName }: OtelDetail) => {
       console.log('x has been deleted');
     }
   });
-  return text;
+  return data.data.text;
 };
 
 export default getOtelDetail;
