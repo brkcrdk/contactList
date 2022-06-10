@@ -3,7 +3,6 @@ import { createWorker } from 'tesseract.js';
 import dotenv from 'dotenv';
 import fs from 'fs';
 dotenv.config();
-const worker = createWorker();
 
 interface OtelDetail {
   page: Page;
@@ -19,13 +18,15 @@ const mainUrl = process.env.WEB_PAGE;
  * Sonrasında da bu resmi `fs` ile siler.
  */
 const getOtelDetail = async ({ page, otelUrl, otelName }: OtelDetail) => {
+  const worker = createWorker();
   const computedUrl = `${mainUrl}/${otelUrl}`;
+
   await page.goto(computedUrl);
   const imgElement = await page.$('.pr-card > img');
 
   const imgName = `${otelName}.png`;
-
   await imgElement?.screenshot({ path: imgName });
+
   await worker.load();
   await worker.loadLanguage('eng');
   await worker.initialize('eng');
