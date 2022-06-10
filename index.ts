@@ -32,7 +32,12 @@ const app = async () => {
 
     for (const otelUrl of otelLinks) {
       const otelName = otelUrl.split('-telefon')[0];
-      console.log({ cityName, otelName });
+
+      const otelDetail = await getOtelDetail({
+        page,
+        otelUrl
+      });
+      console.log({ location: cityName, otelName, otelDetail });
     }
   }
 
