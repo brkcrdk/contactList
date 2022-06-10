@@ -10,30 +10,34 @@ const worker = createWorker({
 interface OtelDetail {
   page: Page;
   otelUrl: string;
+  otelName: string;
 }
 
 const mainUrl = process.env.WEB_PAGE;
 /**
  * Gelen otel url'inden otel bilgilerinin bulunduğu resmi bulur
- * O resmi local dosya olarak kaydettikten sonra, `tesseract` ile
+ * O resmi local dosya olarak kaydettikten sonra,¨ `tesseract` ile
  * resimdeki yazıları texte çevirir ve bu texti return eder.
  * Sonrasında da bu resmi `fs` ile siler.
  */
-const getOtelDetail = async ({ page, otelUrl }: OtelDetail) => {
+const getOtelDetail = async ({ page, otelUrl, otelName }: OtelDetail) => {
   const computedUrl = `${mainUrl}/${otelUrl}`;
   await page.goto(computedUrl);
   const imgElement = await page.$('.pr-card > img');
 
-  await imgElement?.screenshot({ path: 'x.png' });
+  const imgName = `${otelName}.png`;
 
+  await imgElement?.screenshot({ path: imgName });
   await worker.load();
   await worker.loadLanguage('eng');
   await worker.initialize('eng');
+
   const {
     data: { text }
-  } = await worker.recognize('x.png');
+  } = await worker.recognize(imgName);
   await worker.terminate();
-  fs.unlink('x.png', (err) => {
+
+  fs.unlink(imgName, (err) => {
     if (err) {
       console.log('couldnt delete this');
     } else {

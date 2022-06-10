@@ -35,7 +35,8 @@ const app = async () => {
 
       const otelDetail = await getOtelDetail({
         page,
-        otelUrl
+        otelUrl,
+        otelName
       });
       console.log({ location: cityName, otelName, otelDetail });
     }
