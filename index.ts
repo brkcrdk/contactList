@@ -1,7 +1,7 @@
 import puppeteer from 'puppeteer';
 import dotenv from 'dotenv';
 
-import { getCityLinks, getOtelLinks, getOtelDetail } from 'utils';
+import { getCityLinks, getOtelLinks, getOtelDetail, createExcel } from 'utils';
 dotenv.config();
 
 const mainUrl = process.env.WEB_PAGE;
@@ -14,67 +14,49 @@ const app = async () => {
   const pageURL = `${mainUrl}/mugla-otelleri-telefon.html`;
   await page.goto(pageURL);
 
-  console.log('started collecting city links');
+  // console.log('started collecting city links');
 
-  const cityLinks = await getCityLinks({ page });
-  console.log('successfully collected city links');
+  // const cityLinks = await getCityLinks({ page });
+  // console.log('successfully collected city links');
 
-  console.log('started collecting otel details');
-  for (const cityUrl of cityLinks) {
-    const cityName = cityUrl.split('-')[1];
+  // console.log('started collecting otel details');
+  // for (const cityUrl of cityLinks) {
+  //   const cityName = cityUrl.split('-')[1];
 
-    console.log(`started collecting ${cityName} `);
-    const otelLinks = await getOtelLinks({
-      page,
-      cityUrl
-    });
-    console.log(`successfully collected ${cityName}s otel links `);
+  //   console.log(`started collecting ${cityName} `);
+  //   const otelLinks = await getOtelLinks({
+  //     page,
+  //     cityUrl
+  //   });
+  //   console.log(`successfully collected ${cityName}s otel links `);
 
-    for (const otelUrl of otelLinks) {
-      const otelName = otelUrl.split('-telefon')[0];
+  //   for (const otelUrl of otelLinks) {
+  //     const otelName = otelUrl.split('-telefon')[0];
 
-      const otelDetail = await getOtelDetail({
-        page,
-        otelUrl,
-        otelName
-      });
-      console.log({ location: cityName, otelName, otelDetail });
-    }
-  }
+  //     const otelDetail = await getOtelDetail({
+  //       page,
+  //       otelUrl,
+  //       otelLocation: cityName
+  //     });
+  //     // const otelInfos = otelDetail.replace('\n', '');
+  //     console.log({ location: cityName, otelName, otelDetail });
+  //   }
+  // }
+
+  const otelDetail = await getOtelDetail({
+    page,
+    otelUrl: 'adres-3461-telefon-iletisim.html',
+    otelLocation: 'akyaka'
+  });
 
   console.log('successflully collected otel detail');
 
-  // console.log(cityLinks);
-
-  // console.log('started collecting otel links');
-  // const otelLinks = await getOtelLinks({
-  //   page,
-  //   cityUrl: 'mugla-dalyan-otelleri-iletisim.html'
-  // });
-
-  // console.log(otelLinks);
-
-  // console.log('succesfully collected otel links!');
-
-  // const otelDetail = await getOtelDetail({
-  //   page,
-  //   otelUrl: 'hotel-metin-telefon-iletisim.html'
-  // });
-  // console.log(otelDetail);
-
-  // await otelDetail?.screenshot({ path: 'x.png' });
-
-  // const imgText = await imgToText({ imgUrl: 'x.png' });
-  // fs.unlink('x.png', (err) => {
-  //   if (err) {
-  //     console.log('couldnt delete this');
-  //   } else {
-  //     console.log('x has been deleted');
-  //   }
-  // });
-
   await browser.close();
   console.log('finished collecting');
-};
+
+  // console.log('creating excel file from collected data');
+  // createExcel();
+  // console.log('excel file is created');
+};;
 
 app();
