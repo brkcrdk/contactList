@@ -16,9 +16,12 @@ NOTE: x is some random webpage that i keep secret for obvious reasons.
 * [x] Test getting all otels available with one city.
 * [x] Test getting otel informations with one otel.
 * [x] Test getting text from images with taken img.
-* [x] Test getting text from base64 string. --> Didn't have to use it.
+* [x] Test getting text from base64 string. NOTE: Didn't have to use it.
 * [x] Instead of converting image and text seperately, get text from image in one go.
 * [x] Delete images after took text from it.
 * [x] Fix getCityLinks returning nodeList instead of array of city url strings.
 * [x] Fix getOtelLinks returning nodeList instead of array of city url strings.
-* [ ] Get all available otels details.
+* [x] Get all available otels details.
+* [ ] Test creating `csv`
+* [ ] Save informations into `csv` file
+* [ ] Convert `csv` file into `xls` or `xlsx` file
