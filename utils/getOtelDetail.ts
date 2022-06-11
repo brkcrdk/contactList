@@ -48,21 +48,19 @@ const getOtelDetail = async ({
     await worker.initialize('eng');
 
     const data = await worker.recognize(imgName);
-    const test = beautifyText(data.data.text);
     await worker.terminate();
 
     fs.unlink(imgName, (err) => {
       if (err) {
         console.log(`couldnt delete ${imgName}`);
-      } else {
-        console.log(`${imgName} has been deleted`);
       }
     });
+    const { email, phoneNumber } = beautifyText(data.data.text);
     return {
       otelLocation,
       otelName,
-      email: '',
-      phoneNumber: ''
+      email,
+      phoneNumber
     };
   } else {
     return {
