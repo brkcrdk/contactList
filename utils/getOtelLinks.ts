@@ -1,4 +1,4 @@
-import { Page, ElementHandle } from 'puppeteer';
+import { Page } from 'puppeteer';
 import dotenv from 'dotenv';
 
 dotenv.config();
