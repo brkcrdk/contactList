@@ -3,7 +3,7 @@
     "baseUrl": ".",
     "target": "es5",
     "module": "commonjs",
-    "lib": ["es6"],
+    "lib": ["es2021"],
     "allowJs": true,
     "rootDir": "/",
     "strict": true,
