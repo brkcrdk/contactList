@@ -3,6 +3,7 @@ import { createWorker } from 'tesseract.js';
 import dotenv from 'dotenv';
 import fs from 'fs';
 import beautifyText from './beautifyText';
+import { DetailProps } from 'types';
 
 dotenv.config();
 
@@ -10,13 +11,6 @@ interface OtelDetail {
   page: Page;
   otelUrl: string;
   otelLocation: string;
-}
-
-interface DetailProps {
-  otelName: string;
-  otelLocation: string;
-  email: string;
-  phoneNumber: string;
 }
 
 const mainUrl = process.env.WEB_PAGE;

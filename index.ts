@@ -8,12 +8,14 @@ import {
   createExcel,
   logger
 } from 'utils';
+import { DetailProps } from 'types';
 
 dotenv.config();
 
 const mainUrl = process.env.WEB_PAGE;
 
 const app = async () => {
+  const data = [];
   // console.log('started collecting');
   logger({ logType: 'warn', content: 'started collecting' });
   const browser = await puppeteer.launch();
