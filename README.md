@@ -23,3 +23,4 @@ NOTE: x is some random webpage that i keep secret for obvious reasons.
 * [x] Fix getOtelLinks returning nodeList instead of array of city url strings.
 * [x] Get all available otels details.
 * [ ] Convert data into xlsx file
+* [ ] Instead of returning text, return info object from getOtelDetail function
