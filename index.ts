@@ -1,5 +1,6 @@
 import puppeteer from 'puppeteer';
 import dotenv from 'dotenv';
+import fs from 'fs';
 
 import {
   getCityLinks,
@@ -44,10 +45,6 @@ const app = async () => {
 
     for (const otelUrl of otelLinks) {
       const otelName = otelUrl.split('-telefon')[0];
-      logger({
-        logType: 'warn',
-        content: `collecting details for ${otelName}`
-      });
 
       const otelDetail = await getOtelDetail({
         page,
@@ -57,8 +54,8 @@ const app = async () => {
       data.push(otelDetail);
 
       logger({
-        logType: 'success',
-        content: `successfully collected data for ${otelName}`
+        logType: 'info',
+        content: `successfully collected => ${otelName} ~ ${cityName}`
       });
     }
   }
@@ -68,8 +65,12 @@ const app = async () => {
   logger({ logType: 'success', content: 'finished collecting data' });
 
   // console.log('creating excel file from collected data');
-  // createExcel();
-  // console.log('excel file is created');
+  logger({
+    logType: 'warn',
+    content: 'creating excel file from collected data'
+  });
+  createExcel(data);
+  logger({ logType: 'success', content: 'excel file is created' });
 };
 
 app();
