@@ -2,8 +2,9 @@ import { Page } from 'puppeteer';
 import { createWorker } from 'tesseract.js';
 import dotenv from 'dotenv';
 import fs from 'fs';
-import beautifyText from './beautifyText';
 import { DetailProps } from 'types';
+import beautifyText from './beautifyText';
+import capitalize from './capitalize';
 
 dotenv.config();
 
@@ -51,15 +52,15 @@ const getOtelDetail = async ({
     });
     const { email, phoneNumber } = beautifyText(data.data.text);
     return {
-      otelLocation,
-      otelName,
+      otelLocation: capitalize(otelLocation),
+      otelName: capitalize(otelName.replaceAll('-', ' ')),
       email,
       phoneNumber
     };
   } else {
     return {
-      otelLocation,
-      otelName,
+      otelLocation: capitalize(otelLocation),
+      otelName: capitalize(otelName.replaceAll('-', ' ')),
       email: '-',
       phoneNumber: '-'
     };

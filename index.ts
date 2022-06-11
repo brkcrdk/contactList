@@ -15,7 +15,7 @@ dotenv.config();
 const mainUrl = process.env.WEB_PAGE;
 
 const app = async () => {
-  const data = [];
+  const data: DetailProps[] = [];
   // console.log('started collecting');
   logger({ logType: 'warn', content: 'started collecting' });
   const browser = await puppeteer.launch();
@@ -54,16 +54,17 @@ const app = async () => {
         otelUrl,
         otelLocation: cityName
       });
-      console.log(otelDetail);
+      data.push(otelDetail);
 
       logger({
         logType: 'success',
-        content: `successflully collected data for ${otelName}`
+        content: `successfully collected data for ${otelName}`
       });
     }
   }
 
   await browser.close();
+  console.log(data);
   logger({ logType: 'success', content: 'finished collecting data' });
 
   // console.log('creating excel file from collected data');
