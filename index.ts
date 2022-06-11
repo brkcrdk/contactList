@@ -17,6 +17,7 @@ const mainUrl = process.env.WEB_PAGE;
 
 const app = async () => {
   const data: DetailProps[] = [];
+  let counter = 0;
   // console.log('started collecting');
   logger({ logType: 'warn', content: 'started collecting' });
   const browser = await puppeteer.launch();
@@ -51,12 +52,15 @@ const app = async () => {
         otelUrl,
         otelLocation: cityName
       });
-      data.push(otelDetail);
-
-      logger({
-        logType: 'info',
-        content: `successfully collected => ${otelName} ~ ${cityName}`
-      });
+      const { email, phoneNumber } = otelDetail;
+      if (email || phoneNumber) {
+        data.push(otelDetail);
+        counter++;
+        logger({
+          logType: 'info',
+          content: `successfully collected => ${otelName} ~ ${cityName} #${counter}`
+        });
+      }
     }
   }
 

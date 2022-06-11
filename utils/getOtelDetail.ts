@@ -61,8 +61,8 @@ const getOtelDetail = async ({
     return {
       otelLocation: capitalize(otelLocation),
       otelName: capitalize(otelName.replaceAll('-', ' ')),
-      email: '-',
-      phoneNumber: '-'
+      email: '',
+      phoneNumber: ''
     };
   }
 };

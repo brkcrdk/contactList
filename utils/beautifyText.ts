@@ -40,7 +40,7 @@ const beautifyText = (text: string): Details => {
   });
 
   const [phoneNumber, email] = customDetails;
-  return { email: email || '-', phoneNumber: phoneNumber || '-' };
+  return { email, phoneNumber };
 };
 
 export default beautifyText;
