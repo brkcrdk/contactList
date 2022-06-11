@@ -22,20 +22,25 @@ const beautifyText = (text: string): Details => {
     .split('\n')
     .filter((string) => string.includes('E-mail') || string.includes('Tel'));
 
-  const customDetails = details.map((detail) =>
-    detail.replace(/[^a-zA-Z0-9]/, '').replace('-', ':')
-  );
-  console.log(customDetails);
+  const customDetails = details.map((value) => {
+    const detail = value.replace(/[^a-zA-Z0-9]/, '');
+    if (detail.includes('Email')) {
+      /**
+       * Eğer içerik email adresi ise, email label'ını sil ve
+       * içerikteki `:`,`-` ve tüm boşlukları sil
+       */
+      return detail.split('Email')[1].replace(/[:-]/g, '').trim();
+    } else {
+      /**
+       * Eğer içerik telefon numarasıysa, stringden sadece number olanları
+       * al, gerisini sil
+       */
+      return detail.replace(/\D/g, '').trim();
+    }
+  });
 
-  /**
-   * Yazılış formatı: Tel.: - 05123131313 veya Tel. - 05123131123
-   * Boşlukları temizler ve içerisinden sadece telefon numarasını return eder.
-   */
-  // const phoneNumber = details.find((val) => val.includes('Tel'))?.split('-')[1];
-
-  // const email = details.find((val) => val.includes('E-mail'))?.split(':')[1];
-
-  return { email: '', phoneNumber: '' };
+  const [phoneNumber, email] = customDetails;
+  return { email: email || '-', phoneNumber: phoneNumber || '-' };
 };
 
 export default beautifyText;
