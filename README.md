@@ -22,6 +22,4 @@ NOTE: x is some random webpage that i keep secret for obvious reasons.
 * [x] Fix getCityLinks returning nodeList instead of array of city url strings.
 * [x] Fix getOtelLinks returning nodeList instead of array of city url strings.
 * [x] Get all available otels details.
-* [ ] Test creating `csv`
-* [ ] Save informations into `csv` file
-* [ ] Convert `csv` file into `xls` or `xlsx` file
+* [ ] Convert data into xlsx file
