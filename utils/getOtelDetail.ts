@@ -2,22 +2,37 @@ import { Page } from 'puppeteer';
 import { createWorker } from 'tesseract.js';
 import dotenv from 'dotenv';
 import fs from 'fs';
+import beautifyText from './beautifyText';
+
 dotenv.config();
 
 interface OtelDetail {
   page: Page;
   otelUrl: string;
+  otelLocation: string;
+}
+
+interface DetailProps {
   otelName: string;
+  otelLocation: string;
+  email: string;
+  phoneNumber: string;
 }
 
 const mainUrl = process.env.WEB_PAGE;
 /**
  * Gelen otel url'inden otel bilgilerinin bulunduğu resmi bulur
- * O resmi local dosya olarak kaydettikten sonra,¨ `tesseract` ile
- * resimdeki yazıları texte çevirir ve bu texti return eder.
+ * O resmi local dosya olarak kaydettikten sonra, `tesseract` ile
+ * resimdeki yazıları texte çevirir ve bu textten aldığı bilgileri return eder.
  * Sonrasında da bu resmi `fs` ile siler.
  */
-const getOtelDetail = async ({ page, otelUrl, otelName }: OtelDetail) => {
+const getOtelDetail = async ({
+  page,
+  otelUrl,
+  otelLocation
+}: OtelDetail): Promise<DetailProps> => {
+  const otelName = otelUrl.split('-telefon')[0];
+
   const worker = createWorker();
   const computedUrl = `${mainUrl}/${otelUrl}`;
 
@@ -33,6 +48,7 @@ const getOtelDetail = async ({ page, otelUrl, otelName }: OtelDetail) => {
     await worker.initialize('eng');
 
     const data = await worker.recognize(imgName);
+    const test = beautifyText(data.data.text);
     await worker.terminate();
 
     fs.unlink(imgName, (err) => {
@@ -42,9 +58,19 @@ const getOtelDetail = async ({ page, otelUrl, otelName }: OtelDetail) => {
         console.log(`${imgName} has been deleted`);
       }
     });
-    return data.data.text;
+    return {
+      otelLocation,
+      otelName,
+      email: '',
+      phoneNumber: ''
+    };
   } else {
-    return 'iletişim bilgisi bulunamadı.';
+    return {
+      otelLocation,
+      otelName,
+      email: '-',
+      phoneNumber: '-'
+    };
   }
 };
 
