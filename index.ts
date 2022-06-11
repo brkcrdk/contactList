@@ -14,40 +14,34 @@ const app = async () => {
   const pageURL = `${mainUrl}/mugla-otelleri-telefon.html`;
   await page.goto(pageURL);
 
-  // console.log('started collecting city links');
+  console.log('started collecting city links');
 
-  // const cityLinks = await getCityLinks({ page });
-  // console.log('successfully collected city links');
+  const cityLinks = await getCityLinks({ page });
+  console.log('successfully collected city links');
 
-  // console.log('started collecting otel details');
-  // for (const cityUrl of cityLinks) {
-  //   const cityName = cityUrl.split('-')[1];
+  console.log('started collecting otel details');
+  for (const cityUrl of cityLinks) {
+    const cityName = cityUrl.split('-')[1];
 
-  //   console.log(`started collecting ${cityName} `);
-  //   const otelLinks = await getOtelLinks({
-  //     page,
-  //     cityUrl
-  //   });
-  //   console.log(`successfully collected ${cityName}s otel links `);
+    console.log(`started collecting ${cityName} `);
+    const otelLinks = await getOtelLinks({
+      page,
+      cityUrl
+    });
+    console.log(`successfully collected ${cityName}s otel links `);
 
-  //   for (const otelUrl of otelLinks) {
-  //     const otelName = otelUrl.split('-telefon')[0];
+    for (const otelUrl of otelLinks) {
+      const otelName = otelUrl.split('-telefon')[0];
 
-  //     const otelDetail = await getOtelDetail({
-  //       page,
-  //       otelUrl,
-  //       otelLocation: cityName
-  //     });
-  //     // const otelInfos = otelDetail.replace('\n', '');
-  //     console.log({ location: cityName, otelName, otelDetail });
-  //   }
-  // }
+      const otelDetail = await getOtelDetail({
+        page,
+        otelUrl,
+        otelLocation: cityName
+      });
 
-  const otelDetail = await getOtelDetail({
-    page,
-    otelUrl: 'adres-3461-telefon-iletisim.html',
-    otelLocation: 'akyaka'
-  });
+      // console.log({ location: cityName, otelName, otelDetail });
+    }
+  }
 
   console.log('successflully collected otel detail');
 
@@ -57,6 +51,6 @@ const app = async () => {
   // console.log('creating excel file from collected data');
   // createExcel();
   // console.log('excel file is created');
-};;
+};
 
 app();
