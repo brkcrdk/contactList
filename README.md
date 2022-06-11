@@ -22,5 +22,7 @@ NOTE: x is some random webpage that i keep secret for obvious reasons.
 * [x] Fix getCityLinks returning nodeList instead of array of city url strings.
 * [x] Fix getOtelLinks returning nodeList instead of array of city url strings.
 * [x] Get all available otels details.
-* [ ] Convert data into xlsx file
+* [x] Convert data into xlsx file
 * [ ] Instead of returning text, return info object from getOtelDetail function
+* [ ] Take email and phone numbers by regexp and return more beautiful object
+* [ ] Convert all informations into excel file.
