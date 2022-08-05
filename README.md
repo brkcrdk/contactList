@@ -23,6 +23,12 @@ NOTE: x is some random webpage that i keep secret for obvious reasons.
 * [x] Fix getOtelLinks returning nodeList instead of array of city url strings.
 * [x] Get all available otels details.
 * [x] Convert data into xlsx file
-* [ ] Instead of returning text, return info object from getOtelDetail function
-* [ ] Take email and phone numbers by regexp and return more beautiful object
-* [ ] Convert all informations into excel file.
+* [x] Instead of returning text, return info object from getOtelDetail function
+* [x] Take email and phone numbers by regexp and return more beautiful object
+* [x] Convert all informations into excel file.
+
+### V2 Goal: Instead of getting one city otel contacts, get all available otel informations
+#### V2 Steps:
+* [x] Firstly, we have to know all available city names. For that we have to scrape through index to get all available ones.
+* [ ] Our function works one city at a time, so it has to get city name as parameter.
+* [ ] It should creates new page on start, after getting informations should remove that page on close.
