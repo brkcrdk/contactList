@@ -21,11 +21,11 @@ const app = async () => {
   const browser = await puppeteer.launch();
 
   logger({ logType: 'warn', content: 'started collecting city names' });
-  const cities = await getCityLinks(browser);
+  const cities = await getCityLinks({ browser });
   logger({ logType: 'success', content: 'successfully collected city names' });
 
-  for (const city of cities) {
-    const test = await getCityInformations({ browser, cityUrl: city });
+  for (const cityUrl of cities) {
+    const test = await getCityInformations({ browser, cityUrl });
     console.log(test);
   }
 
