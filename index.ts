@@ -7,6 +7,7 @@ import {
   getOtelLinks,
   getOtelDetail,
   createExcel,
+  getCityInformations,
   logger
 } from 'utils';
 import { DetailProps } from 'types';
@@ -23,7 +24,10 @@ const app = async () => {
   const cities = await getCityLinks(browser);
   logger({ logType: 'success', content: 'successfully collected city names' });
 
-  console.log(cities);
+  for (const city of cities) {
+    const test = await getCityInformations({ browser, cityUrl: city });
+    console.log(test);
+  }
 
   await browser.close();
 };
