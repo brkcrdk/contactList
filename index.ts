@@ -17,6 +17,7 @@ dotenv.config();
 const mainUrl = process.env.WEB_PAGE;
 
 const app = async () => {
+  let totalOtelCount = 0;
   logger({ logType: 'warn', content: 'started collecting' });
   const browser = await puppeteer.launch();
 
@@ -25,8 +26,12 @@ const app = async () => {
   logger({ logType: 'success', content: 'successfully collected city names' });
 
   for (const cityUrl of cities) {
-    const test = await getCityInformations({ browser, cityUrl });
-    console.log(test);
+    const test = await getCityInformations({
+      browser,
+      cityUrl,
+      updateOtelCount: () => totalOtelCount++
+    });
+    console.log(test, cities.length, totalOtelCount);
   }
 
   await browser.close();
