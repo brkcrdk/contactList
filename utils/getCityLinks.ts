@@ -1,23 +1,28 @@
-import { Page } from 'puppeteer';
-
-interface CityLinks {
-  page: Page;
-}
+import { Browser } from 'puppeteer';
 
 /**
- * Sayfayı gezer ve `.pr-card-link` classındaki elementleri tarar
- * denk gelen elementlerin href attributelarındaki değerleri döner.
- * Bu dönen değer `ElementHandle` olduğu için array gibi kullanılamaz.
- * Array'e çevirmek için ilk olarak dönen değeri string'e çevirmek gerekli
- * Ardından, stringi split ederek kendi arrayimizi oluşturmuş oluyoruz
+ * It gets puppeteer instance as a browser and creates a new page with that
+ * After that it goes our target url and search through city cards and closes the page.
+ * Then returns city names.
+ *
+ * NOTE: This function could also works for town link beacuse they work with same structure
+ * so we will be using this function for getting both city and town links
  */
+const getCityLinks = async (browser: Browser): Promise<string[]> => {
+  const mainUrl = process.env.WEB_PAGE;
+  const page = await browser.newPage();
 
-const getCityLinks = async ({ page }: CityLinks): Promise<string[]> => {
+  await page.goto(String(mainUrl));
+
   const cityLinks = await page.$$eval('.pr-card-link', (nodes) =>
     nodes.map((val) => val.getAttribute('href'))
   );
 
-  return cityLinks.toString().split(',');
+  const cityNames = cityLinks.toString().split(',');
+
+  page.close();
+
+  return cityNames;
 };
 
 export default getCityLinks;
